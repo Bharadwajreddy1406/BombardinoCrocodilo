@@ -208,9 +208,28 @@ export default function MapLocator() {
   // State for current location and loading state
   const [userLocation, setUserLocation] = useState<{lat: number; lng: number} | null>(null);
   const [isLoadingLocation, setIsLoadingLocation] = useState(false);
+  // State to determine if we're on desktop view
+  const [isDesktop, setIsDesktop] = useState(false);
 
   // Reference for the map container
   const mapRef = useRef<HTMLDivElement>(null);
+
+  // Handle window resize and check for desktop view
+  useEffect(() => {
+    // Check if we're on the client-side before accessing window
+    if (typeof window !== 'undefined') {
+      const checkIsDesktop = () => setIsDesktop(window.innerWidth >= 1024);
+      
+      // Set initial value
+      checkIsDesktop();
+      
+      // Add resize listener
+      window.addEventListener('resize', checkIsDesktop);
+      
+      // Cleanup
+      return () => window.removeEventListener('resize', checkIsDesktop);
+    }
+  }, []);
 
   // Simulated map loading effect
   useEffect(() => {
@@ -357,7 +376,7 @@ export default function MapLocator() {
 
       {/* Centers Sidebar */}
       <AnimatePresence>
-        {(sidebarVisible || window.innerWidth >= 1024) && (
+        {(sidebarVisible || isDesktop) && (
           <motion.div
             initial={{ x: 300, opacity: 0.5 }}
             animate={{ x: 0, opacity: 1 }}
