@@ -250,7 +250,7 @@ export default function OnboardingModal({ isOpen: propIsOpen, onClose: propOnClo
               </div>
 
               {/* Content based on current step */}
-              <div className="relative min-h-[350px]">
+              <div className="relative min-h-auto">
                 <AnimatePresence mode="wait">
                   {/* Step 1: Language Selection */}
                   {step === 1 && (
@@ -271,7 +271,7 @@ export default function OnboardingModal({ isOpen: propIsOpen, onClose: propOnClo
                       </div>
 
                       {/* Language grid */}
-                      <div className="grid grid-cols-3 gap-3 mb-6">
+                      <div className="grid grid-cols-3 gap-3 pb-6">
                         {languages.map((language) => (
                           <button
                             key={language.code}
@@ -308,7 +308,7 @@ export default function OnboardingModal({ isOpen: propIsOpen, onClose: propOnClo
                       </div>
 
                       {/* Topics grid */}
-                      <div className="grid grid-cols-2 gap-3 mb-6">
+                      <div className="grid grid-cols-2 gap-3 pb-6">
                         {legalTopics.map((topic) => (
                           <button
                             key={topic.id}
@@ -353,7 +353,7 @@ export default function OnboardingModal({ isOpen: propIsOpen, onClose: propOnClo
                       </div>
 
                       {/* Accessibility options */}
-                      <div className="space-y-4 mb-6">
+                      <div className="space-y-4 pb-6">
                         {/* Text to speech */}
                         <div className="flex items-center justify-between p-4 border rounded-lg hover:border-primary/30 hover:bg-accent/5 cursor-pointer"
                           onClick={() => toggleAccessibilityOption('textToSpeech')}>
